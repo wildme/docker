@@ -1,0 +1,21 @@
+services:
+  express:
+    container_name: "web_stamp"
+    build: .
+    depends_on:
+      - db
+    restart: "unless-stopped"
+    ports:
+      - "3000:3000"
+    volumes:
+      - /files/stamp/files:/stamp/files
+      - /files/stamp/logs:/stamp/logs
+  db:
+    image: "mongo"
+    container_name: "db_stamp"
+    restart: "unless-stopped"
+    ports:
+      - "27017:27017"
+    volumes:
+      - /files/db/stamp:/data/db
+
