@@ -7,6 +7,7 @@ services:
     restart: "unless-stopped"
     ports:
       - "3000:3000"
+      - "3080:3080"
     volumes:
       - /files/stamp/files:/stamp/files
       - /files/stamp/logs:/stamp/logs
