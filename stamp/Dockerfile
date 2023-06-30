@@ -1,7 +1,7 @@
 FROM node:16.14-alpine3.14 AS react
 WORKDIR /tmp/stamp
 RUN wget https://github.com/wildme/stamp/tarball/master -O - | tar xz --strip-components=1
-RUN npm install --silent
+RUN npm install --production --silent
 RUN npm run build --silent
 
 FROM node:16.14-alpine3.14 AS express
@@ -12,10 +12,11 @@ RUN adduser --disabled-password --gecos "" --ingroup stamp stamp
 USER stamp
 WORKDIR /stamp
 RUN wget https://github.com/wildme/server-stamp/tarball/master -O - | tar xz --strip-components=1
-RUN npm install --silent
+RUN npm install --production --silent
 COPY --from=react /tmp/stamp/build ./build
 COPY ecosystem.config.js ./
 ENV NODE_OPTIONS=--tls-min-v1.0
+ENV NODE_ENV=production
 ENV STAMP_EXPRESS_PORT=3000
 ENV STAMP_WEBSOCKET_PORT=3080
 ENV STAMP_EXPRESS_STATIC_DIR='build'
