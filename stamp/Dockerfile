@@ -7,9 +7,6 @@ RUN npm run build --silent
 FROM node:16.14-alpine3.14 AS express
 EXPOSE 3000
 RUN npm install -g pm2 --silent
-RUN addgroup --gid 1001 stamp
-RUN adduser --disabled-password --gecos "" --ingroup stamp stamp
-USER stamp
 WORKDIR /stamp
 RUN wget https://github.com/wildme/server-stamp/tarball/master -O - | tar xz --strip-components=1
 RUN npm install --production --silent
