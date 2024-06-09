@@ -8,7 +8,7 @@ FROM node:18.20-alpine3.20 AS express
 EXPOSE 3000
 RUN npm install -g pm2 --silent
 WORKDIR /stamp
-RUN wget https://github.com/wildme/server-stamp/tarball/master -O - | tar xz --strip-components=1
+RUN wget https://github.com/wildme/server-stamp/tarball/main -O - | tar xz --strip-components=1
 RUN npm install --production --silent
 COPY --from=react /tmp/stamp/build ./build
 COPY ecosystem.config.js ./
