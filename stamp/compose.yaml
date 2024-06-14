@@ -1,5 +1,7 @@
+name: stamp
+
 services:
-  express:
+  app:
     container_name: "web_stamp"
     build: .
     depends_on:
