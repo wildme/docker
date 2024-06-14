@@ -6,8 +6,9 @@ RUN npm run build --silent
 
 FROM node:18.20-alpine3.20 AS express
 EXPOSE 3000
-RUN npm install -g pm2 --silent
+EXPOSE 3080
 WORKDIR /stamp
+RUN npm install -g pm2 --silent
 RUN wget https://github.com/wildme/server-stamp/tarball/main -O - | tar xz --strip-components=1
 RUN npm install --production --silent
 COPY --from=react /tmp/stamp/build ./build
@@ -34,4 +35,4 @@ ENV STAMP_EXPRESS_SMTP_REJECT_UNAUTH=0
 ENV STAMP_EXPRESS_SMTP_FROM=<EMAIL_ADDRESS>
 ENV STAMP_EXPRESS_SMTP_USER=<USERNAME>
 ENV STAMP_EXPRESS_SMTP_PASS=<PASSWORD>
-CMD ["pm2-runtime", "ecosystem.config.js"]
+ENTRYPOINT ["pm2-runtime", "ecosystem.config.js"]
