@@ -3,6 +3,7 @@ name: stamp
 services:
   app:
     container_name: "web_stamp"
+    env_file: app.env
     build: .
     depends_on:
       - db
