@@ -1,4 +1,4 @@
-FROM node:18.20-alpine3.20 AS react
+FROM node:18.20.6-alpine3.20 AS react
 WORKDIR /tmp/stamp
 RUN wget https://github.com/wildme/stamp/tarball/master -O - | tar xz --strip-components=1
 RUN npm install --production --silent
