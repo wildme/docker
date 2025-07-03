@@ -5,6 +5,14 @@ services:
     container_name: "web_stamp"
     env_file: app.env
     build: .
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 250M
+        reservations:
+          cpus: "0.5"
+          memory: 140M
     depends_on:
       - db
     restart: "unless-stopped"
@@ -15,8 +23,16 @@ services:
       - /files/stamp/files:/stamp/files
       - /files/stamp/logs:/stamp/logs
   db:
-    image: "mongo"
     container_name: "db_stamp"
+    image: "mongo"
+    deploy:
+      resources:
+        limits:
+          cpus: "1.0"
+          memory: 350M
+        reservations:
+          cpus: "0.5"
+          memory: 250M
     restart: "unless-stopped"
     ports:
       - "27017:27017"
