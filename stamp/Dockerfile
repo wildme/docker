@@ -1,10 +1,10 @@
-FROM node:18.20.6-alpine3.20 AS react
+FROM node:20.19.6-alpine3.22 AS react
 WORKDIR /tmp/stamp
 RUN wget https://github.com/wildme/stamp/tarball/main -O - | tar xz --strip-components=1
 RUN npm install --production --silent
 RUN npm run build --silent
 
-FROM node:18.20-alpine3.20 AS express
+FROM node:20.19.6-alpine3.22 AS express
 EXPOSE 3000
 EXPOSE 3080
 WORKDIR /stamp
