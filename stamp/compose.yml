@@ -24,7 +24,7 @@ services:
       - ${DOCKER_VOL_STAMP_LOGS}:/stamp/logs
   db:
     container_name: "db_stamp"
-    image: "mongo"
+    image: "mongo:6.0.27"
     deploy:
       resources:
         limits:
